@@ -10,15 +10,29 @@ class TPostfix
 {
   string infix;
   string postfix;
+  string oper = "+-*/()";
 public:
-  TPostfix()
+  TPostfix(string _infix = "a+b")
   {
-    infix = "a + b";
+	  postfix = "";
+	  for (int i = 0; i < _infix.length(); i++)
+	  {
+		  if (_infix[i] != ' ')
+		  {
+			  infix += _infix[i];
+		  }
+	  }
+	  if (infix.length() < 1)
+	  {
+		  throw "Error";
+	  }
   }
   string GetInfix() { return infix; }
   string GetPostfix() { return postfix; }
-  string ToPostfix();
-  double Calculate(); // Ввод переменных, вычисление по постфиксной форме
+  string ToPostfix();// перевод в постфиксную форму
+  double Calculate(double* val); // Ввод переменных, вычисление по постфиксной форме
+  int Priority(char tmp); // сравнение приоритета элементов
+  int CountLetter();
 };
 
 #endif
